@@ -1,4 +1,5 @@
 # load the featurebyte SDK
+import uuid
 import featurebyte as fb
 from featurebyte.api.request_column import RequestColumn
 
@@ -260,7 +261,13 @@ def tag_credit_card_entities_to_columns(bank_customer_table, state_details_table
     card_transaction_group_table.TransactionGroup.as_entity("transaction_group")
 
 def create_playground_credit_card_catalog():
-    catalog_name = "credit card playground " + datetime.now().strftime("%Y%m%d:%H%M")
+    clean_catalogs(verbose = True)
+    
+    # generate a new GUID 
+    guid = uuid.uuid4()
+
+    # generate a unique catalog name
+    catalog_name = "credit card playground " + datetime.now().strftime("%Y%m%d:%H%M") + "_" + str(guid)
 
     print("Building a playground catalog for credit cards named [" + catalog_name + "]")
 
